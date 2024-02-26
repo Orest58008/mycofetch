@@ -1,0 +1,4 @@
+(executable
+ (libraries str)
+ (public_name mycofetch)
+ (name main))
