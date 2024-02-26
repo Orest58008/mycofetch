@@ -1,8 +1,0 @@
-lib: [
-  "_build/install/default/lib/mycofetch/META"
-  "_build/install/default/lib/mycofetch/dune-package"
-  "_build/install/default/lib/mycofetch/opam"
-]
-bin: [
-  "_build/install/default/bin/mycofetch"
-]
