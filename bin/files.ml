@@ -7,10 +7,10 @@ let strip str : string =
 let read_lines path : string list =
   In_channel.open_text path |> In_channel.input_lines
 
-let read_line path : string =
+let read_file path : string =
   In_channel.open_text path |> In_channel.input_all
 
-let process_file path sep : (string * string) list =
+let retrieve_file path sep : (string * string) list =
   let rec process_lines lines = (
     match lines with
     | [] -> []
@@ -20,12 +20,12 @@ let process_file path sep : (string * string) list =
                     (key, data)::(process_lines rest)
     ) in process_lines (read_lines path)
 
-let process_file_key path sep target : (string * string) =
+let retrieve_key path sep target : string =
   let rec process_lines lines = (
       match lines with
       | [] -> raise (Failure (path ^ " does not contain " ^ target))
       | line::rest -> let line_split = String.split_on_char sep line in
                       let key = List.hd line_split |> String.lowercase_ascii in
                       let data = List.tl line_split |> List.hd |> strip in
-                      if key = target then (key, data) else process_lines rest
+                      if key = target then data else process_lines rest
     ) in process_lines (read_lines path)
