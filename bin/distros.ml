@@ -1,107 +1,415 @@
-let rec distro_of_id id : (string, string) Hashtbl.t =
+type pm = {
+    name : string;
+    command : string;
+  }
+
+type distro = {
+    pm : pm;
+    color : string;
+    logo_tiny : string;
+    logo : string array;
+  }
+
+let distro_of_id id : distro =
   match id with
-  | "alpine" -> [
-      "pm_name",   "apk";
-      "pm_command","apk info";
-      "color",     "c4";
-      "logo_tiny", "";
-      "logo_0",    "#c4#      /\\          ";
-      "logo_1",    "#c4#     /  \\         ";
-      "logo_2",    "#c4#    / /\\ \\  /\\    ";
-      "logo_3",    "#c4#   / /  \\ \\/  \\   ";
-      "logo_4",    "#c4#  / /    \\ \\/\\ \\  ";
-      "logo_5",    "#c4# / / /|   \\ \\ \\ \\ ";
-      "logo_6",    "#c4#/_/ /_|    \\_\\ \\_\\";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "arch" -> [
-      "pm_name",    "pacman";
-      "pm_command", "pacman -Q";
-      "color",      "c6";
-      "logo_tiny",  "";
-      "logo_0",     "#c6#      /\\      ";
-      "logo_1",     "#c6#     /  \\     ";
-      "logo_2",     "#c6#    /\\   \\    ";
-      "logo_3",     "#c6#   /      \\   ";
-      "logo_4",     "#c6#  /   ,,   \\  ";
-      "logo_5",     "#c6# /   |  |  -\\ ";
-      "logo_6",     "#c6#/_-''    ''-_\\";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "arco" -> [
-      "pm_name",    "pacman";
-      "pm_command", "pacman -Q";
-      "color",      "c4";
-      "logo_tiny",  "";
-      "logo_0",     "#c4#      /\\      ";
-      "logo_1",     "#c4#     /  \\     ";
-      "logo_2",     "#c4#    / /\\ \\    ";
-      "logo_3",     "#c4#   / /  \\ \\   ";
-      "logo_4",     "#c4#  / /    \\ \\  ";
-      "logo_5",     "#c4# / / _____\\ \\ ";
-      "logo_6",     "#c4#/_/  `----.__\\";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "artix" -> [
-      "pm_name",    "pacman";
-      "pm_command", "pacman -Q";
-      "color",      "c6";
-      "logo_tiny",  "";
-      "logo_0",     "#c6#      /\\      ";
-      "logo_1",     "#c6#     /  \\     ";
-      "logo_2",     "#c6#    /`'.,\\    ";
-      "logo_3",     "#c6#   /     ',   ";
-      "logo_4",     "#c6#  /      ,`\\  ";
-      "logo_5",     "#c6# /   ,.'`.  \\ ";
-      "logo_6",     "#c6#/.,'`     `'.\\";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "centos" -> [
-      "pm_name",    "rpm";
-      "pm_command", "rpm -qa";
-      "color",      "c5";
-      "logo_tiny",  "";
-      "logo_0",     "#c2# ____#c3#^#c5#____ ";
-      "logo_1",     "#c2# |\\  #c3#|#c5#  /| ";
-      "logo_2",     "#c2# | \\ #c3#|#c5# / | ";
-      "logo_3",     "#c5#<---- #c4#---->";
-      "logo_4",     "#c4# | / #c2#|#c3# \\ | ";
-      "logo_5",     "#c4# |/__#c2#|#c3#__\\| ";
-      "logo_6",     "#c2#     v     ";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "crux" -> [
-      "pm_name",    "pkginfo";
-      "pm_command", "pkginfo -i";
-      "color",      "c6";
-      "logo_tiny",  "";
-      "logo_0",     "#c6#    ___   ";
-      "logo_1",     "#c6#   (#c7#.· #c6#|  ";
-      "logo_2",     "#c6#   (#c3#<> #c6#|  ";
-      "logo_3",     "#c6#  / #c7#__  #c6#\\ ";
-      "logo_4",     "#c6# ( #c7#/  \\ #c6#/|";
-      "logo_5",     "#c3#_#c6#/\\#c7#\\__)#c6#/#c3#_#c6#)";
-      "logo_6",     "#c3#\\/#c6#-____#c3#\\/ ";
-    ] |> List.to_seq |> Hashtbl.of_seq
-  | "crystal" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "endeavouros" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "fedora" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "freebsd" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "gentoo" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "guix" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "hyperbola" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "linux" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "linuxmint" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "mageia" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "manjaro" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "mx" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "neon" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "nixos" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "openbsd" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "opensuse-tumbleweed" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "opensuse-leap" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "parabola" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "popos" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "pureos" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "qubesos" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "raspbian" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "slackware" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "solus" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "ubuntu" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | "void" -> [] |> List.to_seq |> Hashtbl.of_seq
-  | _ -> distro_of_id "linux"
+  | "alpine" -> {
+      pm = { name = "apk"; command = "apk info" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#      /\\          ";
+                "#c4#     /  \\         ";
+                "#c4#    / /\\ \\  /\\    ";
+                "#c4#   / /  \\ \\/  \\   ";
+                "#c4#  / /    \\ \\/\\ \\  ";
+                "#c4# / / /|   \\ \\ \\ \\ ";
+                "#c4#/_/ /_|    \\_\\ \\_\\"; |]
+    }
+  | "arch" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c6";
+      logo_tiny = "";
+      logo = [| "#c6#      /\\      ";
+                "#c6#     /  \\     ";
+                "#c6#    /\\   \\    ";
+                "#c6#   /      \\   ";
+                "#c6#  /   ,,   \\  ";
+                "#c6# /   |  |  -\\ ";
+                "#c6#/_-''    ''-_\\"; |]
+    }
+  | "arco" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#      /\\      ";
+                "#c4#     /  \\     ";
+                "#c4#    / /\\ \\    ";
+                "#c4#   / /  \\ \\   ";
+                "#c4#  / /    \\ \\  ";
+                "#c4# / / _____\\ \\ ";
+                "#c4#/_/  `----.__\\"; |]
+    }
+  | "artix" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c6";
+      logo_tiny = "";
+      logo = [| "#c6#      /\\      ";
+                "#c6#     /  \\     ";
+                "#c6#    /`'.,\\    ";
+                "#c6#   /     ',   ";
+                "#c6#  /      ,`\\  ";
+                "#c6# /   ,.'`.  \\ ";
+                "#c6#/.,'`     `'.\\"; |]
+    }
+  | "centos" -> {
+      pm = { name = "rpm"; command = "rpm -qa" };
+      color = "c5";
+      logo_tiny = "";
+      logo = [| "#c2# ____#c3#^#c5#____ ";
+                "#c2# |\\  #c3#|#c5#  /| ";
+                "#c2# | \\ #c3#|#c5# / | ";
+                "#c5#<---- #c4#---->";
+                "#c4# | / #c2#|#c3# \\ | ";
+                "#c4# |/__#c2#|#c3#__\\| ";
+                "#c2#     v     "; |]
+    }
+  | "crux" -> {
+      pm = { name = "pkginfo"; command = "pkginfo -i" };
+      color = "c6";
+      logo_tiny ="";
+      logo = [| "#c6#    ___   ";
+                "#c6#   (#c7#.· #c6#|  ";
+                "#c6#   (#c3#<> #c6#|  ";
+                "#c6#  / #c7#__  #c6#\\ ";
+                "#c6# ( #c7#/  \\ #c6#/|";
+                "#c3#_#c6#/\\#c7#\\__)#c6#/#c3#_#c6#)";
+                "#c3#\\/#c6#-____#c3#\\/ "; |]
+    }
+  | "crystal" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c5";
+      logo_tiny = "";
+      logo = [| "#c5#  //    ";
+                "#c5# //     ";
+                "#c5#//   \\\\ ";
+                "#c5#\\\\    \\\\";
+                "#c5# \\\\   //";
+                "#c5#     // ";
+                "#c5#    //  "; |]
+    }
+  | "debian" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c1";
+      logo_tiny = "";
+      logo = [| "#c1#   ,---._ ";
+                "#c1# /`  __  \\";
+                "#c1#|   /    |";
+                "#c1#|   `.__.`";
+                "#c1# \\        ";
+                "#c1#  `-._    ";
+                "#c1#      `   "; |]
+    }
+  | "devuan" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#-.,          ";
+                "#c4#   `'-._     ";
+                "#c4#        `::. ";
+                "#c4#          \\::";
+                "#c4#      __--`:`";
+                "#c4# _,--` _.-`  ";
+                "#c4#:_,--``      "; |]
+    }
+  | "endeavouros" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c5";
+      logo_tiny = "";
+      logo = [| "#c1#      /#c5#\\     ";
+                "#c1#    /#c5#/  \\#c4#\\   ";
+                "#c1#   /#c5#/    \\ #c4#\\ ";
+                "#c1# / #c5#/     _) #c4#)";
+                "#c1#/_#c5#/___-- #c4#__- ";
+                "#c4# /____--     "; |]
+    }
+  | "fedora" -> {
+      pm = { name = "rpm"; command = "rpm -qa" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c7#      ____   ";
+                "#c7#     /  __)#c4#\\ ";
+                "#c7#  ___| |_#c4#_) )";
+                "#c7# / __|  _)#c4#_/ ";
+                "#c7#( (__| |     ";
+                "#c7# \\_____/     "; |]
+    }
+  | "freebsd" -> {
+      pm = { name = "pkg"; command = "pkg info" };
+      color = "c1";
+      logo_tiny = "";
+      logo = [| "#c1# _  _____  _ ";
+                "#c1#/ \\`     `/ \\";
+                "#c1#\\/       (__/";
+                "#c1#|           |";
+                "#c1#|           |";
+                "#c1# \\         / ";
+                "#c1#  `-_____-`  "; |]
+    }
+  | "gentoo" -> {
+      pm = { name = "portage"; command = "ls /var/db/pkg/*" };
+      color = "c5";
+      logo_tiny = "";
+      logo = [| "#c5# .-----.   ";
+                "#c5#(       \\  ";
+                "#c5#\\   ()   \\ ";
+                "#c5# \\        )";
+                "#c5# /      _/ ";
+                "#c5#(     _-   ";
+                "#c5#\\____-     "; |]
+    }
+  | "guix" -> {
+      pm = { name = "guix"; command = "guix package --list-installed" };
+      color = "c3";
+      logo_tiny = "";
+      logo = [| "#c3#\\____          ____/";
+                "#c3# \\__ \\        / __/ ";
+                "#c3#    \\ \\      / /    ";
+                "#c3#     \\ \\    / /     ";
+                "#c3#      \\ \\  / /      ";
+                "#c3#       \\ \\/ /       ";
+                "#c3#        \\__/        "; |]
+    }
+  | "hyperbola" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c7";
+      logo_tiny = "";
+      logo = [| "#c7#    /`__.`/ ";
+                "#c7#    \\____/  ";
+                "#c7#    .--.    ";
+                "#c7#   /    \\   ";
+                "#c7#  /  ___ \\  ";
+                "#c7# / .`   `.\\ ";
+                "#c7#/.`      `.\\"; |]
+    }
+  | "linuxmint" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c2";
+      logo_tiny = "󰣭";
+      logo = [| "#c2# ___________ ";
+                "#c2#|_          \\";
+                "#c2#  | #c7#| ,.,., #c2#|";
+                "#c2#  | #c7#| | | | #c2#|";
+                "#c2#  | #c7#| | | | #c2#|";
+                "#c2#  | #c7#\\_____/ #c2#|";
+                "#c2#  \\_________/"; |]
+    }
+  | "mageia" -> {
+      pm = { name = "rpm"; command = "rpm -qa" };
+      color = "c6";
+      logo_tiny = "";
+      logo = [| "#c6#   *    ";
+                "#c6#    *   ";
+                "#c6#   **   ";
+                "#c7# /\\__/\\ ";
+                "#c7#/      \\";
+                "#c7#\\      /";
+                "#c7# \\____/ "; |]
+    }
+  | "manjaro" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c2";
+      logo_tiny = "";
+      logo = [| "#c2#||||||||| ||||";
+                "#c2#||||||||| ||||";
+                "#c2#|||| .... ||||";
+                "#c2#|||| |||| ||||";
+                "#c2#|||| |||| ||||";
+                "#c2#|||| |||| ||||";
+                "#c2#|||| |||| ||||"; |]
+    }
+  | "mx" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c7";
+      logo_tiny = "";
+      logo = [| "#c7#    \\\\  / ";
+                "#c7#     \\\\/  ";
+                "#c7#      \\\\  ";
+                "#c7#   /\\/ \\\\ ";
+                "#c7#  /  \\  V\\";
+                "#c7# /    \\/  \\";
+                "#c7#/__________\\"; |]
+    }
+  | "neon" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c6";
+      logo_tiny = "";
+      logo = [| "#c7#  .#c6#__#c7#.#c6#__#c7#.  ";
+                "#c6# /  _#c7#.#c6#_  \\ ";
+                "#c6#/  /   \\  \\";
+                "#c7#. #c6#|  #c7#O#c6#  | #c7#.";
+                "#c6#\\  \\_#c7#.#c6#_/  /";
+                "#c6# \\#c7#.#c6#__#c7#.#c6#__#c7#.#c6#/ "; |]
+    }
+  | "nixos" -> {
+      pm = { name = "nix";
+             command = "nix-store -q --requisites /run/current-system/sw
+                        nix-store -q --requisites ~/.nix-profile" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#  \\\\  \\\\ //  ";
+                "#c4#===\\\\__\\\\/ //";
+                "#c4#   //   \\\\// ";
+                "#c4#==//     //==";
+                "#c4# //\\\\___//   ";
+                "#c4#// /\\\\  \\\\===";
+                "#c4#  // \\\\  \\\\  "; |]
+    }
+  | "openbsd" -> {
+      pm = { name = "ports"; command = "ls /var/db/pkg" };
+      color = "c3";
+      logo_tiny = "";
+      logo = [| "#c3#     _____    ";
+                "#c3#   \\-     -/  ";
+                "#c3#\\_/         \\ ";
+                "#c3#|        #c7#O O#c3# |";
+                "#c3#|_  <   )  3 )";
+                "#c3#/ \\         / ";
+                "#c3#   /-_____-\\  "; |]
+    }
+  | "opensuse-tumbleweed" -> {
+      pm = { name = "rpm"; command = "rpm -qa" };
+      color = "c4";
+      logo_tiny = "∞";
+      logo = [| "#c4#  _____   ______  ";
+                "#c4# / ____\\ / ____ \\ ";
+                "#c4#/ /    '/ /    \\ \\";
+                "#c4#\\ \\____/ /,____/ /";
+                "#c4# \\______/ \\_____/ "; |]
+    }
+  | "opensuse-leap" -> {
+      pm = { name = "rpm"; command = "rpm -qa" };
+      color = "c2";
+      logo_tiny = "";
+      logo = [| "#c2#  _______  ";
+                "#c2#__|   __ \\ ";
+                "#c2#     / .\\ \\";
+                "#c2#     \\__/ |";
+                "#c2#   _______|";
+                "#c2#   \\_______";
+                "#c2#__________/"; |]
+    }
+  | "parabola" -> {
+      pm = { name = "pacman"; command = "pacman -Qq" };
+      color = "c5";
+      logo_tiny = "";
+      logo = [| "#c5#  __ __ __  _  ";
+                "#c5#.`_//_//_/ / `.";
+                "#c5#          /  .`";
+                "#c5#         / .`  ";
+                "#c5#        /.`    ";
+                "#c5#       /`      "; |]
+    }
+  | "popos" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c6";
+      logo_tiny = "";
+      logo = [| "#c7# 76767      ";
+                "#c7#76  76   767";
+                "#c7# 7676'   76 ";
+                "#c7#  76     7  ";
+                "#c7#   76   76  ";
+                "#c7# __________ ";
+                "#c7# 7676767676 "; |]
+    }
+  | "pureos" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c7";
+      logo_tiny = "□";
+      logo = [| "#c7# _____________ ";
+                "#c7#|  _________  |";
+                "#c7#| |         | |";
+                "#c7#| |         | |";
+                "#c7#| |_________| |";
+                "#c7#|_____________|"; |]
+    }
+  | "qubesos" -> {
+      pm = { name = ""; command = "" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#    _--_    ";
+                "#c4# _-'    '-_ ";
+                "#c4#|   .''.   |";
+                "#c4#|  |    |  |";
+                "#c4#|  |    |  |";
+                "#c4#'-_ '--'  -'";
+                "#c4#   '-__-\\_\\ "; |]
+    }
+  | "raspbian" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c1";
+      logo_tiny =  "";
+      logo = [| "#c2#  __  __  ";
+                "#c2# (_\\)(/_) ";
+                "#c1# (_(__)_) ";
+                "#c1#(_(_)(_)_)";
+                "#c1# (_(__)_) ";
+                "#c1#   (__)   "; |]
+    }
+  | "slackware" -> {
+      pm = { name = "pkgtool"; command = "ls /var/log/packages" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#   ________  ";
+                "#c4#  /  ______| ";
+                "#c4#  | |______  ";
+                "#c4#  \\______  \\ ";
+                "#c4#   ______| | ";
+                "#c4#| |________/ ";
+                "#c4#|____________"; |]
+    }
+  | "solus" -> {
+      pm = { name = "eopkg"; command = "eopkg list-installed" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c7#      _     ";
+                "#c7#     /|     ";
+                "#c7#    / |\\    ";
+                "#c7#   /  | \\ _ ";
+                "#c7#  /#c4#___#c7#|#c4#__#c7#\\#c4#_#c7#\\";
+                "#c4# \\         /";
+                "#c4#  `-------' "; |]
+    }
+  | "ubuntu" -> {
+      pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
+      color = "c1";
+      logo_tiny = "";
+      logo = [| "#c1#         _ ";
+                "#c1#     ---(_)";
+                "#c1# _/  ---  \\";
+                "#c1#(_) |   |  ";
+                "#c1#  \\  --- _/";
+                "#c1#     ---(_)"; |]
+    }
+  | "void" -> {
+      pm = { name = "xbps"; command = "xbps-query -l" };
+      color = "c2";
+      logo_tiny = "";
+      logo = [| "#c2#    _______  ";
+                "#c2# _ \\______ - ";
+                "#c2#| \\  ___  \\ |";
+                "#c2#| | /   \\ | |";
+                "#c2#| | \\___/ | |";
+                "#c2#| \\______ \\_|";
+                "#c2# -_______\\   "; |]
+    }
+  | _ -> {
+      pm = { name = ""; command = "" };
+      color = "c4";
+      logo_tiny = "";
+      logo = [| "#c4#    ___   ";
+                "#c4#   (#c7#.. #c4#\\  ";
+                "#c4#   (#c3#<> #c4#|  ";
+                "#c4#  /#c7#/  \\ #c4#\\ ";
+                "#c4# ( #c7#|  | #c4#/|";
+                "#c3#_#c4#/\\#c7#\\__)#c4#/#c3#_#c4#)";
+                "#c3#\\/#c4#-____#c3#\\/ "; |]
+    }
