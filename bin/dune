@@ -1,4 +1,4 @@
 (executable
- (libraries str)
+ (libraries str unix)
  (public_name mycofetch)
  (name main))

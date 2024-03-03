@@ -11,8 +11,8 @@ let fetch source : (string, string) Hashtbl.t =
                   let get_file f = Files.read_file ("/proc/sys/kernel/" ^ f) in
                   List.map (fun f -> (f, get_file f |> strip)) kernel_files
                   |> List.to_seq |> Hashtbl.of_seq
-    | "board" -> let board_files = ["board_name"; "board_vendor"; "board_version"] in
-                 let get_file f = Files.read_file ("/sys/devices/virtual/dmi/id/" ^ f) in
+    | "board" -> let board_files = ["name"; "vendor"; "version"] in
+                 let get_file f = Files.read_file ("/sys/devices/virtual/dmi/id/board_" ^ f) in
                  List.map (fun f -> (f, get_file f |> strip)) board_files
                  |> List.to_seq |> Hashtbl.of_seq
     | "host" -> [("name", Files.read_file "/etc/hostname")]
