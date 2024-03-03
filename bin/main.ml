@@ -14,24 +14,27 @@ let fetched = List.filter (fun x ->
 
 (* Print everything *)
 let logo_counter = ref 0
+let result = Files.read_file template_path |> String.length |> Buffer.create
 let () = List.iter2 (fun source word ->
              match source with
-             | "" -> print_string word
+             | "" -> Buffer.add_string result word
              | "distro" -> let os = Files.retrieve_file "/etc/os-release" '=' in
                            let id = List.assoc "id" os in
                            let distro = Distros.distro_of_id id in
                            (match word with
-                            | "pm_name" -> print_string distro.pm.name
-                            | "pm_command" -> print_string distro.pm.command
-                            | "color" -> print_string distro.color
-                            | "logo_tiny" -> print_string distro.logo_tiny
+                            | "pm_name" -> Buffer.add_string result distro.pm.name
+                            | "pm_command" -> Buffer.add_string result distro.pm.command
+                            | "color" -> Buffer.add_string result distro.color
+                            | "logo_tiny" -> Buffer.add_string result distro.logo_tiny
                             | "logo" -> (distro.logo.(!logo_counter) ^ "\x1b[0m")
                                         |> Template.style_line |> String.concat ""
-                                        |> print_string;
+                                        |> Buffer.add_string result;
                                         logo_counter := !logo_counter + 1
                             | _ -> raise (Invalid_argument word)
                            )
              | source when List.mem_assoc source fetched ->
-                print_string (Hashtbl.find (List.assoc source fetched) word)
-             | _ -> print_string word
+                Buffer.add_string result (Hashtbl.find (List.assoc source fetched) word)
+             | _ -> Buffer.add_string result word
            ) sources words
+
+let () = Buffer.output_buffer stdout result
