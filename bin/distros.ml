@@ -16,7 +16,8 @@ let distro_of_id id : distro =
       pm = { name = "apk"; command = "apk info" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#      /\\          ";
+      logo = [| "                  ";
+                "#c4#      /\\          ";
                 "#c4#     /  \\         ";
                 "#c4#    / /\\ \\  /\\    ";
                 "#c4#   / /  \\ \\/  \\   ";
@@ -28,7 +29,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c6";
       logo_tiny = "";
-      logo = [| "#c6#      /\\      ";
+      logo = [| "              ";
+                "#c6#      /\\      ";
                 "#c6#     /  \\     ";
                 "#c6#    /\\   \\    ";
                 "#c6#   /      \\   ";
@@ -40,7 +42,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#      /\\      ";
+      logo = [| "              ";
+                "#c4#      /\\      ";
                 "#c4#     /  \\     ";
                 "#c4#    / /\\ \\    ";
                 "#c4#   / /  \\ \\   ";
@@ -52,7 +55,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c6";
       logo_tiny = "";
-      logo = [| "#c6#      /\\      ";
+      logo = [| "              ";
+                "#c6#      /\\      ";
                 "#c6#     /  \\     ";
                 "#c6#    /`'.,\\    ";
                 "#c6#   /     ',   ";
@@ -64,7 +68,8 @@ let distro_of_id id : distro =
       pm = { name = "rpm"; command = "rpm -qa" };
       color = "c5";
       logo_tiny = "";
-      logo = [| "#c2# ____#c3#^#c5#____ ";
+      logo = [| "           ";
+                "#c2# ____#c3#^#c5#____ ";
                 "#c2# |\\  #c3#|#c5#  /| ";
                 "#c2# | \\ #c3#|#c5# / | ";
                 "#c5#<---- #c4#---->";
@@ -76,7 +81,8 @@ let distro_of_id id : distro =
       pm = { name = "pkginfo"; command = "pkginfo -i" };
       color = "c6";
       logo_tiny ="";
-      logo = [| "#c6#    ___   ";
+      logo = [| "          ";
+                "#c6#    ___   ";
                 "#c6#   (#c7#.· #c6#|  ";
                 "#c6#   (#c3#<> #c6#|  ";
                 "#c6#  / #c7#__  #c6#\\ ";
@@ -88,7 +94,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c5";
       logo_tiny = "";
-      logo = [| "#c5#  //    ";
+      logo = [| "        ";
+                "#c5#  //    ";
                 "#c5# //     ";
                 "#c5#//   \\\\ ";
                 "#c5#\\\\    \\\\";
@@ -100,7 +107,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c1";
       logo_tiny = "";
-      logo = [| "#c1#   ,---._ ";
+      logo = [| "          ";
+                "#c1#   ,---._ ";
                 "#c1# /`  __  \\";
                 "#c1#|   /    |";
                 "#c1#|   `.__.`";
@@ -112,7 +120,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#-.,          ";
+      logo = [| "             ";
+                "#c4#-.,          ";
                 "#c4#   `'-._     ";
                 "#c4#        `::. ";
                 "#c4#          \\::";
@@ -124,7 +133,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c5";
       logo_tiny = "";
-      logo = [| "#c1#      /#c5#\\     ";
+      logo = [| "             ";
+                "#c1#      /#c5#\\     ";
                 "#c1#    /#c5#/  \\#c4#\\   ";
                 "#c1#   /#c5#/    \\ #c4#\\ ";
                 "#c1# / #c5#/     _) #c4#)";
@@ -135,7 +145,8 @@ let distro_of_id id : distro =
       pm = { name = "rpm"; command = "rpm -qa" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c7#      ____   ";
+      logo = [| "             ";
+                "#c7#      ____   ";
                 "#c7#     /  __)#c4#\\ ";
                 "#c7#  ___| |_#c4#_) )";
                 "#c7# / __|  _)#c4#_/ ";
@@ -146,7 +157,8 @@ let distro_of_id id : distro =
       pm = { name = "pkg"; command = "pkg info" };
       color = "c1";
       logo_tiny = "";
-      logo = [| "#c1# _  _____  _ ";
+      logo = [| "             ";
+                "#c1# _  _____  _ ";
                 "#c1#/ \\`     `/ \\";
                 "#c1#\\/       (__/";
                 "#c1#|           |";
@@ -158,7 +170,8 @@ let distro_of_id id : distro =
       pm = { name = "portage"; command = "ls /var/db/pkg/*" };
       color = "c5";
       logo_tiny = "";
-      logo = [| "#c5# .-----.   ";
+      logo = [| "           ";
+                "#c5# .-----.   ";
                 "#c5#(       \\  ";
                 "#c5#\\   ()   \\ ";
                 "#c5# \\        )";
@@ -170,7 +183,8 @@ let distro_of_id id : distro =
       pm = { name = "guix"; command = "guix package --list-installed" };
       color = "c3";
       logo_tiny = "";
-      logo = [| "#c3#\\____          ____/";
+      logo = [| "                    ";
+                "#c3#\\____          ____/";
                 "#c3# \\__ \\        / __/ ";
                 "#c3#    \\ \\      / /    ";
                 "#c3#     \\ \\    / /     ";
@@ -182,7 +196,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c7";
       logo_tiny = "";
-      logo = [| "#c7#    /`__.`/ ";
+      logo = [| "            ";
+                "#c7#    /`__.`/ ";
                 "#c7#    \\____/  ";
                 "#c7#    .--.    ";
                 "#c7#   /    \\   ";
@@ -194,7 +209,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c2";
       logo_tiny = "󰣭";
-      logo = [| "#c2# ___________ ";
+      logo = [| "             ";
+                "#c2# ___________ ";
                 "#c2#|_          \\";
                 "#c2#  | #c7#| ,.,., #c2#|";
                 "#c2#  | #c7#| | | | #c2#|";
@@ -206,7 +222,8 @@ let distro_of_id id : distro =
       pm = { name = "rpm"; command = "rpm -qa" };
       color = "c6";
       logo_tiny = "";
-      logo = [| "#c6#   *    ";
+      logo = [| "        ";
+                "#c6#   *    ";
                 "#c6#    *   ";
                 "#c6#   **   ";
                 "#c7# /\\__/\\ ";
@@ -218,7 +235,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c2";
       logo_tiny = "";
-      logo = [| "#c2#||||||||| ||||";
+      logo = [| "              ";
+                "#c2#||||||||| ||||";
                 "#c2#||||||||| ||||";
                 "#c2#|||| .... ||||";
                 "#c2#|||| |||| ||||";
@@ -230,7 +248,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c7";
       logo_tiny = "";
-      logo = [| "#c7#    \\\\  / ";
+      logo = [| "          ";
+                "#c7#    \\\\  / ";
                 "#c7#     \\\\/  ";
                 "#c7#      \\\\  ";
                 "#c7#   /\\/ \\\\ ";
@@ -242,7 +261,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c6";
       logo_tiny = "";
-      logo = [| "#c7#  .#c6#__#c7#.#c6#__#c7#.  ";
+      logo = [| "           ";
+                "#c7#  .#c6#__#c7#.#c6#__#c7#.  ";
                 "#c6# /  _#c7#.#c6#_  \\ ";
                 "#c6#/  /   \\  \\";
                 "#c7#. #c6#|  #c7#O#c6#  | #c7#.";
@@ -255,7 +275,8 @@ let distro_of_id id : distro =
                         nix-store -q --requisites ~/.nix-profile" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#  \\\\  \\\\ //  ";
+      logo = [| "             ";
+                "#c4#  \\\\  \\\\ //  ";
                 "#c4#===\\\\__\\\\/ //";
                 "#c4#   //   \\\\// ";
                 "#c4#==//     //==";
@@ -267,7 +288,8 @@ let distro_of_id id : distro =
       pm = { name = "ports"; command = "ls /var/db/pkg" };
       color = "c3";
       logo_tiny = "";
-      logo = [| "#c3#     _____    ";
+      logo = [| "              ";
+                "#c3#     _____    ";
                 "#c3#   \\-     -/  ";
                 "#c3#\\_/         \\ ";
                 "#c3#|        #c7#O O#c3# |";
@@ -279,7 +301,8 @@ let distro_of_id id : distro =
       pm = { name = "rpm"; command = "rpm -qa" };
       color = "c4";
       logo_tiny = "∞";
-      logo = [| "#c4#  _____   ______  ";
+      logo = [| "                  ";
+                "#c4#  _____   ______  ";
                 "#c4# / ____\\ / ____ \\ ";
                 "#c4#/ /    '/ /    \\ \\";
                 "#c4#\\ \\____/ /,____/ /";
@@ -289,7 +312,8 @@ let distro_of_id id : distro =
       pm = { name = "rpm"; command = "rpm -qa" };
       color = "c2";
       logo_tiny = "";
-      logo = [| "#c2#  _______  ";
+      logo = [| "           ";
+                "#c2#  _______  ";
                 "#c2#__|   __ \\ ";
                 "#c2#     / .\\ \\";
                 "#c2#     \\__/ |";
@@ -301,7 +325,8 @@ let distro_of_id id : distro =
       pm = { name = "pacman"; command = "pacman -Qq" };
       color = "c5";
       logo_tiny = "";
-      logo = [| "#c5#  __ __ __  _  ";
+      logo = [| "               ";
+                "#c5#  __ __ __  _  ";
                 "#c5#.`_//_//_/ / `.";
                 "#c5#          /  .`";
                 "#c5#         / .`  ";
@@ -312,7 +337,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c6";
       logo_tiny = "";
-      logo = [| "#c7# 76767      ";
+      logo = [| "            ";
+                "#c7# 76767      ";
                 "#c7#76  76   767";
                 "#c7# 7676'   76 ";
                 "#c7#  76     7  ";
@@ -324,7 +350,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c7";
       logo_tiny = "□";
-      logo = [| "#c7# _____________ ";
+      logo = [| "               ";
+                "#c7# _____________ ";
                 "#c7#|  _________  |";
                 "#c7#| |         | |";
                 "#c7#| |         | |";
@@ -335,7 +362,8 @@ let distro_of_id id : distro =
       pm = { name = ""; command = "" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#    _--_    ";
+      logo = [| "            ";
+                "#c4#    _--_    ";
                 "#c4# _-'    '-_ ";
                 "#c4#|   .''.   |";
                 "#c4#|  |    |  |";
@@ -347,7 +375,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c1";
       logo_tiny =  "";
-      logo = [| "#c2#  __  __  ";
+      logo = [| "          ";
+                "#c2#  __  __  ";
                 "#c2# (_\\)(/_) ";
                 "#c1# (_(__)_) ";
                 "#c1#(_(_)(_)_)";
@@ -358,7 +387,8 @@ let distro_of_id id : distro =
       pm = { name = "pkgtool"; command = "ls /var/log/packages" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#   ________  ";
+      logo = [| "             ";
+                "#c4#   ________  ";
                 "#c4#  /  ______| ";
                 "#c4#  | |______  ";
                 "#c4#  \\______  \\ ";
@@ -370,7 +400,8 @@ let distro_of_id id : distro =
       pm = { name = "eopkg"; command = "eopkg list-installed" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c7#      _     ";
+      logo = [| "            ";
+                "#c7#      _     ";
                 "#c7#     /|     ";
                 "#c7#    / |\\    ";
                 "#c7#   /  | \\ _ ";
@@ -382,7 +413,8 @@ let distro_of_id id : distro =
       pm = { name = "dpkg"; command = "dpkg-query -f '.\\n' -W" };
       color = "c1";
       logo_tiny = "";
-      logo = [| "#c1#         _ ";
+      logo = [| "           ";
+                "#c1#         _ ";
                 "#c1#     ---(_)";
                 "#c1# _/  ---  \\";
                 "#c1#(_) |   |  ";
@@ -393,7 +425,8 @@ let distro_of_id id : distro =
       pm = { name = "xbps"; command = "xbps-query -l" };
       color = "c2";
       logo_tiny = "";
-      logo = [| "#c2#    _______  ";
+      logo = [| "             ";
+                "#c2#    _______  ";
                 "#c2# _ \\______ - ";
                 "#c2#| \\  ___  \\ |";
                 "#c2#| | /   \\ | |";
@@ -405,7 +438,8 @@ let distro_of_id id : distro =
       pm = { name = ""; command = "" };
       color = "c4";
       logo_tiny = "";
-      logo = [| "#c4#    ___   ";
+      logo = [| "          ";
+                "#c4#    ___   ";
                 "#c4#   (#c7#.. #c4#\\  ";
                 "#c4#   (#c3#<> #c4#|  ";
                 "#c4#  /#c7#/  \\ #c4#\\ ";

@@ -13,32 +13,44 @@ let fetched = List.filter (fun x ->
               |> dedup |> List.map (fun x -> x, Fetch.fetch x)
 
 (* Print everything *)
-let logo_counter = ref 0
+let logo_n = ref 1
 let result = Files.read_file template_path |> String.length |> Buffer.create
+let result_append = Buffer.add_string result
 let handle source word =
   match source with
-  | "" -> Buffer.add_string result word
+  | "" -> result_append word
   | "distro" -> let os = Files.retrieve_file "/etc/os-release" '=' in
                 let id = List.assoc "id" os in
                 let distro = Distros.distro_of_id id in
                 (match word with
-                 | "pm_name" -> Buffer.add_string result distro.pm.name
-                 | "pm_command" -> Buffer.add_string result distro.pm.command
+                 | "pm_name" -> result_append distro.pm.name
+                 | "pm_command" -> result_append distro.pm.command
                  | "pm_count" -> let count = Unix.open_process_in distro.pm.command
                                              |> In_channel.input_lines |> List.length in
-                                 Buffer.add_string result (string_of_int count)
-                 | "color" -> Buffer.add_string result distro.color
-                 | "logo_tiny" -> Buffer.add_string result distro.logo_tiny
-                 | "logo" -> (distro.logo.(!logo_counter) ^ "\x1b[0m")
-                             |> Template.style_line |> String.concat ""
-                             |> Buffer.add_string result;
-                             logo_counter := !logo_counter + 1
+                                 result_append (string_of_int count)
+                 | "color" -> result_append distro.color
+                 | "logo_tiny" -> result_append distro.logo_tiny
+                 | "logo" -> let logo_line = if !logo_n < Array.length distro.logo
+                                             then (distro.logo.(!logo_n) ^ "\x1b[0m")
+                                             else (distro.logo.(0) ^ "\x1b[0m]") in
+                             Template.style_line logo_line |> String.concat "" |> result_append;
+                             logo_n := !logo_n + 1
                  | _ -> raise (Invalid_argument word)
                 )
-  | "env" -> Buffer.add_string result (Sys.getenv word)
+  | "env" -> result_append (Sys.getenv word)
   | source when List.mem_assoc source fetched ->
-     Buffer.add_string result (Hashtbl.find (List.assoc source fetched) word)
+     let value = Hashtbl.find_opt (List.assoc source fetched) word in (
+         match value with
+         | Some v -> result_append v
+         | None -> raise (Invalid_argument (source ^ ":" ^ word))
+       )
   | _ -> raise (Invalid_argument (source ^ ":" ^ word))
 
+(*
+let () = List.iter (fun (x, y) -> print_endline ("\n" ^ (String.capitalize_ascii x));
+                                  Hashtbl.iter (fun a b -> print_endline (a ^ ":" ^ b)) y)
+           fetched
+ *)
+           
 let () = List.iter2 handle sources words
 let () = Buffer.output_buffer stdout result
