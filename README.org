@@ -1,0 +1,53 @@
+* Mycofetch
+
+** The What
+Mycofetch is fast and flexible system information tool written in OCaml
+
+** The Why
+As said previously, mycofetch is flexible - in fact, all output formatting layout is based
+solely on your custom template. Do you want your logo above the info? Mycofetch can do it.
+Interlaced inbetween? No prob. Mycofetch also features a simple styling language, empowering you
+to colour and style your output.
+
+** The How
+*** Building
+Mycofetch can be easily built with dune:
+#+BEGIN_SRC sh
+dune build --release
+dune install mycofetch
+#+END_SRC
+
+*** Configuration
+For now, mycofetch pulls up the template from ~$HOME/.mftemplate~
+
+**** Sources and their keys:
+All values are included with ~#source:key#~
++ ~os~: ~/etc/os-release~ - as in source, all lowercase
++ ~cpu~: ~/proc/cpuinfo~ - ~vendor~, ~model~, ~name~, ~threads~, ~cores~, ~mhz_CORE~, ~ghz_CORE~
++ ~uptime~: ~/proc/uptime~ - ~hours~, ~mins~, ~secs~
++ ~kernel~: ~/proc/sys/kernel/KEY~ - ~arch~, ~hostname~, ~osrelease~, ~ostype~
++ ~board~: ~/sys/devices/virtual/dmi/id/board_KEY~ - ~name~, ~vendor~, ~version~
++ ~host~: ~/etc/hostname~ - only ~name~ (~#host:name#~)
++ ~env~: envvars - envvar name verbatim
++ ~distro~: everything related to your distro - ~pm_name~, ~pm_command~, ~pm_count~ - parameters
+  related to your package manager; ~color~ - used in ~#cauto#~; ~logo_tiny~ - logo as in nerd
+  fonts; ~logo~ - a line from your distro's logo
+
+**** Styling
+***** Fonts
++ ~#c#~: clear all styling, including colors
++ ~#b#~: bold
++ ~#d#~: dim
++ ~#i#~: italic
++ ~#u#~: underlined
+
+***** Colors
++ ~#cauto#~: primary color of your distro
++ ~#c0#~: black
++ ~#c1#~: red
++ ~#c2#~: green
++ ~#c3#~: yellow
++ ~#c4#~: blue
++ ~#c5#~: magenta
++ ~#c6#~: cyan
++ ~#c7#~: white

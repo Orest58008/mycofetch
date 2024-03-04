@@ -5,7 +5,7 @@ let rec dedup list : 'a list =
                             if List.mem h t_dedup then t_dedup else h::t_dedup
                        
 (* Process config *)
-let template_path = (Sys.getenv "HOME") ^ "/mftemplate"
+let template_path = (Sys.getenv "HOME") ^ "/.mftemplate"
 let sources, words = Files.read_file template_path |> Template.process_line
 let fetched = List.filter (fun x ->
                   try let _ = Fetch.fetch x in true

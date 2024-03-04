@@ -12,14 +12,13 @@ let read_file path : string =
   In_channel.open_text path |> In_channel.input_all
 
 let retrieve_file path sep : (string * string) list =
-  let rec process_line line = (
+  List.map (fun line ->
       let line_split = if line <> ""
                        then String.split_on_char sep line
                        else ["";""] in
       let key = List.hd line_split |> String.lowercase_ascii |> strip in
       let data = List.tl line_split |> List.hd |> strip in
-      (key, data)
-    ) in List.map process_line (read_lines path)
+      (key, data) ) (read_lines path)
 
 let retrieve_key path sep target : string =
   let rec process_lines lines = (

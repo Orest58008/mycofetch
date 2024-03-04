@@ -4,7 +4,8 @@ let find array elem =
 
 (* Config processing *)
 let process_line line : string list * string list =
-  let line = Str.global_replace (Str.regexp "$") "\x1b[0m" line in (* clear styling at each \n *)
+  let line = Str.global_replace (Str.regexp "$") "\x1b[0m" line in (* clear styling at each '\n' *)
+  let line = Str.global_replace (Str.regexp "#+") "#" line in (* replace any number of '#' with one '#' *)
   let fonts = [|"c"; "b"; "d"; "i"; "u"|] in (* clear, bold, dim, italic, underlined *)
   let colours = Array.init 8 (fun x -> "c" ^ string_of_int x) in
   let line_split = (String.split_on_char '#' line) in
@@ -12,7 +13,7 @@ let process_line line : string list * string list =
       match split with
       | [] -> List.rev sources, List.rev values
       | word::rest ->
-         if String.ends_with ~suffix:"\\" word && List.length rest > 0 then (* "\#" processing *)
+         if String.ends_with ~suffix:"\\" word && List.length rest > 0 then (* '\#' processing *)
            let word_trimmed = (String.sub word 0 (String.length word - 1)) in
            process_split ((word_trimmed ^ "#")::rest) sources values
          else if word = "cauto" then (* automatic colour detection *)
@@ -38,7 +39,7 @@ let process_line line : string list * string list =
     ) in process_split line_split [] []
 
 let style_line line : string list =
-  let line = Str.global_replace (Str.regexp "$") "\x1b[0m" line in (* clear styling at each \n *)
+  let line = Str.global_replace (Str.regexp "$") "\x1b[0m" line in (* clear styling at each '\n' *)
   let fonts = [|"c"; "b"; "d"; "i"; "u"|] in (* clear, bold, dim, italic, underlined *)
   let colours = Array.init 8 (fun x -> "c" ^ string_of_int x) in
   let line_split = String.split_on_char '#' line  in
@@ -46,7 +47,7 @@ let style_line line : string list =
       match split with
       | [] -> List.rev values
       | word::rest ->
-         if String.ends_with ~suffix:"\\" word && List.length rest > 0 then (* \# processing*)
+         if String.ends_with ~suffix:"\\" word && List.length rest > 0 then (* '\#' processing*)
            let word_trimmed = (String.sub word 0 (String.length word - 1)) in
            process_split ((word_trimmed ^ "#")::rest) values
          else if word = "cauto" then (* automatic colour detection *)
