@@ -27,7 +27,7 @@ let handle source word =
                  | "pm_command" -> result_append distro.pm.command
                  | "pm_count" -> let count = Unix.open_process_in distro.pm.command
                                              |> In_channel.input_lines |> List.length in
-                                 result_append (string_of_int count)
+                                 result_append (string_of_int (count + 1))
                  | "color" -> result_append distro.color
                  | "logo_tiny" -> result_append distro.logo_tiny
                  | "logo" -> let logo_line = if !logo_n < Array.length distro.logo
