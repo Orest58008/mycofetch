@@ -42,5 +42,23 @@ let fetch source : (string, string) Hashtbl.t =
                                              (string_of_float ghz);
                             | _ -> ()
                           ) (Files.retrieve_file "/proc/cpuinfo" ':') in cpu
-    (* cpu, mem *)
+    | "mem" -> let memtotal, memfree, swaptotal, swapfree = ref 0, ref 0, ref 0, ref 0 in
+               let mem = Hashtbl.create 18 in
+               let mem_add name value =
+                 Hashtbl.add mem (name ^ "_kb") (string_of_int value);
+                 Hashtbl.add mem (name ^ "_mb") (string_of_int (value / 1024));
+                 Hashtbl.add mem (name ^ "_gb") (string_of_int (value / 1048576)); in
+               let () = List.iter (fun (key, data) ->
+                            let data = Str.global_replace (Str.regexp ".kB") "" data
+                                       |> int_of_string in
+                            match key with
+                            | "memtotal" -> memtotal := data; mem_add "memtotal" data
+                            | "memfree" -> memfree := data; mem_add "memfree" data
+                            | "swaptotal" -> swaptotal := data; mem_add "swaptotal" data
+                            | "swapfree" -> swapfree := data; mem_add "swapfree" data
+                            | _ -> ()
+                          ) (Files.retrieve_file "/proc/meminfo" ':') in
+               let memused = !memtotal - !memfree in mem_add "memused" memused;
+               let swapused = !swaptotal - !swapfree in mem_add "swapused" swapused;
+               mem
     | other -> raise (Invalid_argument other)

@@ -24,6 +24,8 @@ For now, mycofetch pulls up the template from ~$HOME/.mftemplate~
 All values are included with ~#source:key#~
 + ~os~: ~/etc/os-release~ - as in source, all lowercase
 + ~cpu~: ~/proc/cpuinfo~ - ~vendor~, ~model~, ~name~, ~threads~, ~cores~, ~mhz_CORE~, ~ghz_CORE~
++ ~mem~: ~/proc/meminfo~ - ~memtotal~, ~memused~, ~memfree~, ~swaptotal~, ~swapused~, ~swapfree~,
+  all in ~VAL_kb~, ~VAL_mb~ and ~VAL_gb~ variants
 + ~uptime~: ~/proc/uptime~ - ~hours~, ~mins~, ~secs~
 + ~kernel~: ~/proc/sys/kernel/KEY~ - ~arch~, ~hostname~, ~osrelease~, ~ostype~
 + ~board~: ~/sys/devices/virtual/dmi/id/board_KEY~ - ~name~, ~vendor~, ~version~
@@ -41,7 +43,7 @@ All values are included with ~#source:key#~
 + ~#i#~: italic
 + ~#u#~: underlined
 
-***** Colors
+***** Colours
 + ~#cauto#~: primary color of your distro
 + ~#c0#~: black
 + ~#c1#~: red
