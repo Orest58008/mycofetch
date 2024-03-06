@@ -16,12 +16,10 @@ let process_line ?(style=false) line : (string * string) list =
       let distro = Files.retrieve_key "/etc/os-release" '=' "id" |> Distros.distro_of_id in
       process_chunk distro.color
     else if Array.mem chunk colours then
-      let colours = Array.init 8 (fun x -> "c" ^ string_of_int x) in
       let colour_num = find colours chunk in
       let colour = "\x1b[3" ^ (string_of_int colour_num) ^ "m" in
       "", colour
     else if Array.mem chunk fonts then
-      let fonts = Array.init 8 (fun x -> "c" ^ string_of_int x) in
       let font_num = find fonts chunk in
       let font = "\x1b[3" ^ (string_of_int font_num) ^ "m" in
       "", font
