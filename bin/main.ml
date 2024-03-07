@@ -2,7 +2,7 @@
 let config: Config.t = Config.get_config Sys.argv
 
 (* Print help and exit *)
-let () = if config.help then Config.print_help; exit 0
+let () = if config.help then Config.print_help ()
 
 (* Get and process template *)
 let template = if config.template <> ""

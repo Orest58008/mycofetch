@@ -19,7 +19,7 @@ let get_config argv : t =
       | _ -> ()
     ) argv; !config
 
-let print_help : unit =
+let print_help () : unit =
   let help = [
       "Mycofetch is a fast and flexible system information tool written in Ocaml";
       "";
@@ -32,4 +32,4 @@ let print_help : unit =
       "     use `distro`'s logo and colours instead of your distro's ones";
       "  -h/--help";
       "     print this message"
-    ] in List.iter print_endline help
+    ] in List.iter print_endline help; exit 0
