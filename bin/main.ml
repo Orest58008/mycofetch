@@ -1,6 +1,9 @@
 (* Local config *)
 let config: Config.t = Config.get_config Sys.argv
 
+(* Print help and exit *)
+let () = if config.help then Config.print_help; exit 0
+
 (* Get and process template *)
 let template = if config.template <> ""
                then config.template else config.template_path |> Files.read_file
@@ -22,9 +25,6 @@ let fetched = List.filter (fun x ->
               |> (fun xs -> let uniq_cons x xs = if List.mem x xs then xs else x::xs
                             in List.fold_right uniq_cons xs [])
               |> List.map (fun x -> x, Domain.spawn (fun() -> Fetch.fetch x))
-
-(* Print help and exit *)
-let () = if config.help then Config.print_help; exit 0
 
 (* Print everything *)
 let logo_n = ref 1
