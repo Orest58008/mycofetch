@@ -1,21 +1,17 @@
 (* Fetching *)
-let strip str : string =
-  let str = Str.global_replace (Str.regexp "\n") "" str in
-  str
-
 let fetch source : (string, string) Hashtbl.t =
     match source with
     | "os" -> Files.retrieve_file "/etc/os-release" '='
               |> List.to_seq |> Hashtbl.of_seq
     | "kernel" -> let kernel_files = ["arch"; "hostname"; "osrelease"; "ostype"] in
-                  let get_file f = Files.read_file ("/proc/sys/kernel/" ^ f) in
-                  List.map (fun f -> (f, get_file f |> strip)) kernel_files
+                  let get_file f = Files.read_line ("/proc/sys/kernel/" ^ f) in
+                  List.map (fun f -> (f, get_file f)) kernel_files
                   |> List.to_seq |> Hashtbl.of_seq
     | "board" -> let board_files = ["name"; "vendor"; "version"] in
-                 let get_file f = Files.read_file ("/sys/devices/virtual/dmi/id/board_" ^ f) in
-                 List.map (fun f -> (f, get_file f |> strip)) board_files
+                 let get_file f = Files.read_line ("/sys/devices/virtual/dmi/id/board_" ^ f) in
+                 List.map (fun f -> (f, get_file f)) board_files
                  |> List.to_seq |> Hashtbl.of_seq
-    | "host" -> [("name", Files.read_file "/etc/hostname" |> strip)]
+    | "host" -> [("name", Files.read_line "/etc/hostname")]
                 |> List.to_seq |> Hashtbl.of_seq
     | "uptime" -> let uptime_file = Files.read_file "/proc/uptime" in
                   let uptime = String.split_on_char ' ' uptime_file

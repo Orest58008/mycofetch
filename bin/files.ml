@@ -1,12 +1,15 @@
 (* Files *)
 let strip str : string =
-  let str = Str.global_replace (Str.regexp {|^"\|"$|}) "" str in
-  let str = Str.global_replace (Str.regexp {|^ +\| +$|}) "" str in
-  let str = Str.global_replace (Str.regexp {|^	+\|	+$|}) "" str in
-  str
+  let len = String.length str in
+  let str = String.mapi (fun i x -> if x = '"' && (i = 0 || i = len - 1) then ' ' else x) str in
+  let str = String.trim str in str
 
 let read_lines path : string list =
   In_channel.open_text path |> In_channel.input_lines
+
+let read_line path : string =
+  In_channel.open_text path |> In_channel.input_line
+  |> Option.fold ~none:"" ~some:(fun x -> x)
 
 let read_file path : string =
   In_channel.open_text path |> In_channel.input_all
