@@ -23,6 +23,9 @@ let fetched = List.filter (fun x ->
                             in List.fold_right uniq_cons xs [])
               |> List.map (fun x -> x, Domain.spawn (fun() -> Fetch.fetch x))
 
+(* Print help and exit *)
+let () = if config.help then Config.print_help; exit 0
+
 (* Print everything *)
 let logo_n = ref 1
 let result = String.length template |> Buffer.create

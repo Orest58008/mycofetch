@@ -13,8 +13,23 @@ let get_config argv : t =
   Array.iteri (fun i x ->
       match x with
       | "-c" | "--config" -> config := { !config with template_path = argv.(i + 1) }
-      | "-h" | "--help" -> config := { !config with help = true }
-      | "-l" | "--logo" -> config := { !config with logo = argv.(i + 1)}
       | "-i" | "--inline" -> config := { !config with template = argv.(i + 1) }
+      | "-l" | "--logo" -> config := { !config with logo = argv.(i + 1)}
+      | "-h" | "--help" -> config := { !config with help = true }
       | _ -> ()
     ) argv; !config
+
+let print_help : unit =
+  let help = [
+      "Mycofetch is a fast and flexible system information tool written in Ocaml";
+      "";
+      "Parameters:";
+      "  -c/--config /path/to/template";
+      "     specify a custom path to template file";
+      "  -i/--inline template";
+      "     use `template` instead of template file";
+      "  -l/--logo distro";
+      "     use `distro`'s logo and colours instead of your distro's ones";
+      "  -h/--help";
+      "     print this message"
+    ] in List.iter print_endline help
