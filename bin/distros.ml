@@ -5,7 +5,7 @@ type pm = {
 
 type distro = {
     pm : pm;
-    color : string;
+    colour : string;
     logo_tiny : string;
     logo : string array;
   }
@@ -18,7 +18,7 @@ let distro_of_id id : distro =
   match id with
   | "alpine" -> {
       pm = { name = "apk"; command = "apk info" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "                  ";
                 "#c4#      /\\          ";
@@ -31,7 +31,7 @@ let distro_of_id id : distro =
     }
   | "arch" -> {
       pm = pm_pacman;
-      color = "c6";
+      colour = "c6";
       logo_tiny = "";
       logo = [| "              ";
                 "#c6#      /\\      ";
@@ -44,7 +44,7 @@ let distro_of_id id : distro =
     }
   | "arco" -> {
       pm = pm_pacman;
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "              ";
                 "#c4#      /\\      ";
@@ -57,7 +57,7 @@ let distro_of_id id : distro =
     }
   | "artix" -> {
       pm = pm_pacman;
-      color = "c6";
+      colour = "c6";
       logo_tiny = "";
       logo = [| "              ";
                 "#c6#      /\\      ";
@@ -70,7 +70,7 @@ let distro_of_id id : distro =
     }
   | "centos" -> {
       pm = pm_rpm;
-      color = "c5";
+      colour = "c5";
       logo_tiny = "";
       logo = [| "           ";
                 "#c2# ____#c3#^#c5#____ ";
@@ -83,7 +83,7 @@ let distro_of_id id : distro =
     }
   | "crux" -> {
       pm = { name = "pkginfo"; command = "pkginfo -i" };
-      color = "c6";
+      colour = "c6";
       logo_tiny ="";
       logo = [| "          ";
                 "#c6#    ___   ";
@@ -96,7 +96,7 @@ let distro_of_id id : distro =
     }
   | "crystal" -> {
       pm = pm_pacman;
-      color = "c5";
+      colour = "c5";
       logo_tiny = "";
       logo = [| "        ";
                 "#c5#  //    ";
@@ -109,7 +109,7 @@ let distro_of_id id : distro =
     }
   | "debian" -> {
       pm = pm_dpkg;
-      color = "c1";
+      colour = "c1";
       logo_tiny = "";
       logo = [| "          ";
                 "#c1#   ,---._ ";
@@ -122,7 +122,7 @@ let distro_of_id id : distro =
     }
   | "devuan" -> {
       pm = pm_dpkg;
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "             ";
                 "#c4#-.,          ";
@@ -135,7 +135,7 @@ let distro_of_id id : distro =
     }
   | "endeavouros" -> {
       pm = pm_pacman;
-      color = "c5";
+      colour = "c5";
       logo_tiny = "";
       logo = [| "             ";
                 "#c1#      /#c5#\\     ";
@@ -147,7 +147,7 @@ let distro_of_id id : distro =
     }
   | "fedora" -> {
       pm = pm_rpm;
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "             ";
                 "#c7#      ____   ";
@@ -159,7 +159,7 @@ let distro_of_id id : distro =
     }
   | "freebsd" -> {
       pm = { name = "pkg"; command = "pkg info" };
-      color = "c1";
+      colour = "c1";
       logo_tiny = "";
       logo = [| "             ";
                 "#c1# _  _____  _ ";
@@ -172,7 +172,7 @@ let distro_of_id id : distro =
     }
   | "gentoo" -> {
       pm = { name = "portage"; command = "ls /var/db/pkg/*" };
-      color = "c5";
+      colour = "c5";
       logo_tiny = "";
       logo = [| "           ";
                 "#c5# .-----.   ";
@@ -185,7 +185,7 @@ let distro_of_id id : distro =
     }
   | "guix" -> {
       pm = { name = "guix"; command = "guix package --list-installed" };
-      color = "c3";
+      colour = "c3";
       logo_tiny = "";
       logo = [| "                    ";
                 "#c3#\\____          ____/";
@@ -198,7 +198,7 @@ let distro_of_id id : distro =
     }
   | "hyperbola" -> {
       pm = pm_pacman;
-      color = "c7";
+      colour = "c7";
       logo_tiny = "";
       logo = [| "            ";
                 "#c7#    /`__.`/ ";
@@ -211,7 +211,7 @@ let distro_of_id id : distro =
     }
   | "linuxmint" -> {
       pm = pm_dpkg;
-      color = "c2";
+      colour = "c2";
       logo_tiny = "󰣭";
       logo = [| "             ";
                 "#c2# ___________ ";
@@ -224,7 +224,7 @@ let distro_of_id id : distro =
     }
   | "mageia" -> {
       pm = pm_rpm;
-      color = "c6";
+      colour = "c6";
       logo_tiny = "";
       logo = [| "        ";
                 "#c6#   *    ";
@@ -237,7 +237,7 @@ let distro_of_id id : distro =
     }
   | "manjaro" -> {
       pm = pm_pacman;
-      color = "c2";
+      colour = "c2";
       logo_tiny = "";
       logo = [| "              ";
                 "#c2#||||||||| ||||";
@@ -250,7 +250,7 @@ let distro_of_id id : distro =
     }
   | "mx" -> {
       pm = pm_dpkg;
-      color = "c7";
+      colour = "c7";
       logo_tiny = "";
       logo = [| "          ";
                 "#c7#    \\\\  / ";
@@ -263,7 +263,7 @@ let distro_of_id id : distro =
     }
   | "neon" -> {
       pm = pm_dpkg;
-      color = "c6";
+      colour = "c6";
       logo_tiny = "";
       logo = [| "           ";
                 "#c7#  .#c6#__#c7#.#c6#__#c7#.  ";
@@ -277,7 +277,7 @@ let distro_of_id id : distro =
       pm = { name = "nix";
              command = "nix-store -q --requisites /run/current-system/sw
                         nix-store -q --requisites ~/.nix-profile" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "             ";
                 "#c4#  \\\\  \\\\ //  ";
@@ -290,7 +290,7 @@ let distro_of_id id : distro =
     }
   | "openbsd" -> {
       pm = { name = "ports"; command = "ls /var/db/pkg" };
-      color = "c3";
+      colour = "c3";
       logo_tiny = "";
       logo = [| "              ";
                 "#c3#     _____    ";
@@ -303,7 +303,7 @@ let distro_of_id id : distro =
     }
   | "opensuse-tumbleweed" -> {
       pm = pm_rpm;
-      color = "c4";
+      colour = "c4";
       logo_tiny = "∞";
       logo = [| "                  ";
                 "#c4#  _____   ______  ";
@@ -314,7 +314,7 @@ let distro_of_id id : distro =
     }
   | "opensuse-leap" -> {
       pm = pm_rpm;
-      color = "c2";
+      colour = "c2";
       logo_tiny = "";
       logo = [| "           ";
                 "#c2#  _______  ";
@@ -327,7 +327,7 @@ let distro_of_id id : distro =
     }
   | "parabola" -> {
       pm = pm_pacman;
-      color = "c5";
+      colour = "c5";
       logo_tiny = "";
       logo = [| "               ";
                 "#c5#  __ __ __  _  ";
@@ -339,7 +339,7 @@ let distro_of_id id : distro =
     }
   | "popos" -> {
       pm = pm_dpkg;
-      color = "c6";
+      colour = "c6";
       logo_tiny = "";
       logo = [| "            ";
                 "#c7# 76767      ";
@@ -352,7 +352,7 @@ let distro_of_id id : distro =
     }
   | "pureos" -> {
       pm = pm_dpkg;
-      color = "c7";
+      colour = "c7";
       logo_tiny = "□";
       logo = [| "               ";
                 "#c7# _____________ ";
@@ -364,7 +364,7 @@ let distro_of_id id : distro =
     }
   | "qubesos" -> {
       pm = { name = ""; command = "" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "            ";
                 "#c4#    _--_    ";
@@ -377,7 +377,7 @@ let distro_of_id id : distro =
     }
   | "raspbian" -> {
       pm = pm_dpkg;
-      color = "c1";
+      colour = "c1";
       logo_tiny =  "";
       logo = [| "          ";
                 "#c2#  __  __  ";
@@ -389,7 +389,7 @@ let distro_of_id id : distro =
     }
   | "slackware" -> {
       pm = { name = "pkgtool"; command = "ls /var/log/packages" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "             ";
                 "#c4#   ________  ";
@@ -402,7 +402,7 @@ let distro_of_id id : distro =
     }
   | "solus" -> {
       pm = { name = "eopkg"; command = "eopkg list-installed" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "            ";
                 "#c7#      _     ";
@@ -415,7 +415,7 @@ let distro_of_id id : distro =
     }
   | "ubuntu" -> {
       pm = pm_dpkg;
-      color = "c1";
+      colour = "c1";
       logo_tiny = "";
       logo = [| "           ";
                 "#c1#         _ ";
@@ -427,7 +427,7 @@ let distro_of_id id : distro =
     }
   | "void" -> {
       pm = { name = "xbps"; command = "xbps-query -l" };
-      color = "c2";
+      colour = "c2";
       logo_tiny = "";
       logo = [| "             ";
                 "#c2#    _______  ";
@@ -440,7 +440,7 @@ let distro_of_id id : distro =
     }
   | _ -> {
       pm = { name = ""; command = "" };
-      color = "c4";
+      colour = "c4";
       logo_tiny = "";
       logo = [| "          ";
                 "#c4#    ___   ";
