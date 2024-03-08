@@ -4,10 +4,13 @@
 Mycofetch is fast and flexible system information tool written in OCaml
 
 ** The Why
-As said previously, Mycofetch is flexible - in fact, all output formatting layout is based
-solely on your custom template. Do you want your logo above the info? Mycofetch can do it.
-Interlaced inbetween? No prob. Mycofetch also features a simple styling language, empowering you
-to colour and style your output.
+As said previously, Mycofetch is flexible - in fact, all output formatting layout is based solely
+on your custom template. Do you want your logo above the info? Mycofetch can do it. Interlaced
+inbetween? No prob. Mycofetch also features a simple styling language, empowering you to colour
+and style your output.
+
+Mycofetch includes performance-enhancing features like parallelism and template compiling and is
+generally faster than, say, pfetch.
 
 ** The How
 *** Building
@@ -58,6 +61,8 @@ All values are included with ~#source:key#~
 
 *** Console flags
 + ~-t~ / ~--template /path/to/template~: specify a custom path to template file
++ ~-m~ / ~--marshal /path/to/compiled_template~: use a compiled template file
++ ~-c~ / ~--compile~ use with ~-m~ / ~--message~ to compile template into file
 + ~-i~ / ~--inline template~: use `template` instead of template file"
 + ~-l~ / ~--logo distro~: use `distro`'s logo and colours instead of your distro's ones"
 + ~-h~ / ~--help~: print this message

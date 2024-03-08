@@ -5,9 +5,13 @@ let config: Config.t = Config.get_config (Sys.argv |> Array.to_list) Config.empt
 let () = if config.help then Config.print_help ()
 
 (* Get and process template *)
-let template = if config.template <> ""
+let template = if config.template <> "" && config.marshal_path <> ""
                then config.template else config.template_path |> Files.read_file
-let template_processed = Template.process_line ~logo:config.logo template
+let template_processed = if config.marshal_path <> "" && not config.marshal_compile
+                         then In_channel.open_text config.marshal_path |> Marshal.from_channel
+                         else Template.process_line ~logo:config.logo template
+let () = if config.marshal_compile
+         then Marshal.to_channel (Out_channel.open_text config.marshal_path) template_processed []
 
 (* Prefetch pm_count if needed *)
 let pm_count = if List.mem ("distro", "pm_count") template_processed

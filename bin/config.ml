@@ -1,4 +1,6 @@
 type t = {
+    marshal_path: string;
+    marshal_compile: bool;
     template_path: string;
     template: string;
     help: bool;
@@ -6,7 +8,8 @@ type t = {
   }
 
 let empty : t =
-  { template_path = ""; template = ""; help = false; logo = "" }
+  { marshal_path = ""; marshal_compile = false; template_path = ""; template = ""; help = false;
+    logo = "" }
 
 let print_help () : unit =
   let help = [
@@ -15,6 +18,10 @@ let print_help () : unit =
       "Parameters:";
       "  -t / --template /path/to/template";
       "      specify a custom path to template file";
+      "  -m / --marshal /path/to/compiled_template";
+      "      use a compiled template file";
+      "  -c / --compile";
+      "      use with -m / --marshal to compile template into file";
       "  -i / --inline template";
       "      use `template` instead of template file";
       "  -l / --logo distro";
@@ -31,6 +38,8 @@ let rec get_config argl config : t =
                                           with _ ->
                                             Sys.getenv "HOME" ^ "/.config/mycofetch/template" }
   | ("-t" | "--template")::path::rest -> { (get_config rest config) with template_path = path }
+  | ("-m" | "--marshal")::path::rest -> { (get_config rest config) with marshal_path = path }
+  | ("-c" | "--compile")::rest -> { (get_config rest config) with marshal_compile = true }
   | ("-i" | "--inline")::inline::rest -> { (get_config rest config) with template = inline }
   | ("-l" | "--logo")::logo::rest -> { (get_config rest config) with logo = logo }
   | ("-h" | "--help")::_ -> print_help (); exit 0
