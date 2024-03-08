@@ -1,5 +1,5 @@
 (* Local config *)
-let config: Config.t = Config.get_config Sys.argv
+let config: Config.t = Config.get_config (Sys.argv |> Array.to_list) Config.empty
 
 (* Print help and exit *)
 let () = if config.help then Config.print_help ()

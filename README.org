@@ -4,7 +4,7 @@
 Mycofetch is fast and flexible system information tool written in OCaml
 
 ** The Why
-As said previously, mycofetch is flexible - in fact, all output formatting layout is based
+As said previously, Mycofetch is flexible - in fact, all output formatting layout is based
 solely on your custom template. Do you want your logo above the info? Mycofetch can do it.
 Interlaced inbetween? No prob. Mycofetch also features a simple styling language, empowering you
 to colour and style your output.
@@ -18,7 +18,9 @@ dune install mycofetch
 #+END_SRC
 
 *** Configuration
-For now, mycofetch pulls up the template from ~$HOME/.mftemplate~
+The priority of template file location is as follows: as specified by ~-t~ and ~--template~ flags,
+as specified by ~$MFTEMPLATE~ envvar, ~$XDG_CONFIG_HOME/mycofetch/template~
+and ~$HOME/.config/mycofetch/template~
 
 **** Sources and their keys:
 All values are included with ~#source:key#~
@@ -32,8 +34,8 @@ All values are included with ~#source:key#~
 + ~host~: ~/etc/hostname~ - only ~name~ (~#host:name#~)
 + ~env~: envvars - envvar name verbatim
 + ~distro~: everything related to your distro - ~pm_name~, ~pm_command~, ~pm_count~ - parameters
-  related to your package manager; ~color~ - used in ~#cauto#~; ~logo_tiny~ - logo as in nerd
-  fonts; ~logo~ - a line from your distro's logo
+  related to your package manager; ~color~ - used in ~#cauto#~; ~logo_tiny~ - logo as in
+  nerdfonts; ~logo~ - a consecutive line from your distro's logo
 
 **** Styling
 ***** Fonts
@@ -53,3 +55,9 @@ All values are included with ~#source:key#~
 + ~#c5#~: magenta
 + ~#c6#~: cyan
 + ~#c7#~: white
+
+*** Console flags
++ ~-t~ / ~--template /path/to/template~: specify a custom path to template file
++ ~-i~ / ~--inline template~: use `template` instead of template file"
++ ~-l~ / ~--logo distro~: use `distro`'s logo and colours instead of your distro's ones"
++ ~-h~ / ~--help~: print this message
