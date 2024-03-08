@@ -5,13 +5,13 @@ let config: Config.t = Config.get_config (Sys.argv |> Array.to_list) Config.empt
 let () = if config.help then Config.print_help ()
 
 (* Get and process template *)
-let template = if config.template <> "" && config.marshal_path <> ""
+let template = if config.template <> "" || config.marshal_path <> ""
                then config.template else config.template_path |> Files.read_file
 let template_processed = if config.marshal_path <> "" && not config.marshal_compile
                          then In_channel.open_text config.marshal_path |> Marshal.from_channel
                          else Template.process_line ~logo:config.logo template
-let () = if config.marshal_compile
-         then Marshal.to_channel (Out_channel.open_text config.marshal_path) template_processed []
+let () =if config.marshal_compile
+        then Marshal.to_channel (Out_channel.open_text config.marshal_path) template_processed []
 
 (* Prefetch pm_count if needed *)
 let pm_count = if List.mem ("distro", "pm_count") template_processed
@@ -34,8 +34,8 @@ let fetched = List.filter (fun x ->
 let () = if config.dump
          then List.iter (fun (x, y) ->
                   print_endline ("\n" ^ (String.capitalize_ascii x));
-                  Hashtbl.iter (fun a b -> print_endline (a ^ ":" ^ b)) (Domain.join y)) fetched;
-         exit 0
+                  Hashtbl.iter (fun a b -> print_endline (a ^ ":" ^ b)) (Domain.join y)) fetched
+let () = if config.dump then exit 0
 
 (* Print everything *)
 let logo_n = ref 1
@@ -65,7 +65,8 @@ let handle (source, word) : unit =
                              logo_n := !logo_n + 1
                  | _ -> raise (Invalid_argument ("distro" ^ ":" ^ word))
                 )
-  | "env" -> result_append (Sys.getenv word)
+  | "env" -> (match Sys.getenv_opt word with
+              | None -> raise (Invalid_argument ("env:" ^ word)) | Some x -> result_append x)
   | source when List.mem_assoc source fetched ->
      let value = Hashtbl.find_opt (List.assoc source fetched |> Domain.join) word in (
          match value with
@@ -75,4 +76,4 @@ let handle (source, word) : unit =
   | _ -> raise (Invalid_argument (source ^ ":" ^ word))
            
 let () = List.iter handle template_processed
-let () = Buffer.output_buffer stdout result
+let () = Buffer.output_buffer stdout result; print_endline ""
