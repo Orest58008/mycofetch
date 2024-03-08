@@ -30,6 +30,13 @@ let fetched = List.filter (fun x ->
                             in List.fold_right uniq_cons xs [])
               |> List.map (fun x -> x, Domain.spawn (fun() -> Fetch.fetch x))
 
+(* Dump fetched *)
+let () = if config.dump
+         then List.iter (fun (x, y) ->
+                  print_endline ("\n" ^ (String.capitalize_ascii x));
+                  Hashtbl.iter (fun a b -> print_endline (a ^ ":" ^ b)) (Domain.join y)) fetched;
+         exit 0
+
 (* Print everything *)
 let logo_n = ref 1
 let result = String.length template |> Buffer.create
