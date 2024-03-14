@@ -37,19 +37,19 @@ All values are included with ~#source:key#~
 + ~host~: ~/etc/hostname~ - only ~name~ (~#host:name#~)
 + ~env~: envvars - envvar name verbatim
 + ~distro~: everything related to your distro - ~pm_name~, ~pm_command~, ~pm_count~ - parameters
-  related to your package manager; ~color~ - used in ~#cauto#~; ~logo_tiny~ - logo as in
+  related to your package manager; ~colour~ - used in ~#cauto#~; ~logo_tiny~ - logo as in
   nerdfonts; ~logo~ - a consecutive line from your distro's logo
 
 **** Styling
 ***** Fonts
-+ ~#c#~: clear all styling, including colors
++ ~#c#~: clear all styling, including colours
 + ~#b#~: bold
 + ~#d#~: dim
 + ~#i#~: italic
 + ~#u#~: underlined
 
 ***** Colours
-+ ~#cauto#~: primary color of your distro
++ ~#cauto#~: primary colour of your distro
 + ~#c0#~: black
 + ~#c1#~: red
 + ~#c2#~: green

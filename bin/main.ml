@@ -45,10 +45,9 @@ let result_append = Buffer.add_string result
 let handle (source, word) : unit =
   match source with
   | "" -> if word = "cauto"
-          then let distro = if config.logo <> "" then config.logo
-                            else Files.retrieve_key "/etc/os-release" '=' "id" in
-               Template.colour_of_tag (Distros.distro_of_id distro).colour |> result_append
-          else result_append word
+          then let id = if config.logo <> "" then config.logo
+                        else Files.retrieve_key "/etc/os-release" '=' "id" in
+               Template.colour_of_tag (Distros.distro_of_id id).colour |> result_append
   | "distro" -> let id = Files.retrieve_file "/etc/os-release" '=' |> List.assoc "id" in
                 let distro = Distros.distro_of_id id in
                 (match word with
