@@ -8,16 +8,13 @@ let font_of_tag tag : string = match tag with
   | _ -> ""
   
 
-let process_line ~logo ?(style=false) line : (string * string) list =
+let process_line ?(style=false) line : (string * string) list =
   let line = Str.global_replace (Str.regexp "$") "\x1b[0m" line in (* clear styling at each \n *)
   let line_split = (String.split_on_char '#' line) in
-  let rec process_chunk ?(style=false) chunk : string * string =
+  let process_chunk ?(style=false) chunk : string * string =
     if String.ends_with ~suffix:"\\" chunk then (* "\#" handling *)
       let chunk_trimmed = (String.sub chunk 0 (String.length chunk - 1)) in
       "", chunk_trimmed ^ "#"
-    else if chunk = "cauto" then (* cauto handling *)
-      let distro = if logo <> "" then logo else Files.retrieve_key "/etc/os-release" '=' "id" in
-      process_chunk (Distros.distro_of_id distro).colour
     else if colour_of_tag chunk <> "" then
       "", colour_of_tag chunk
     else if font_of_tag chunk <> "" then

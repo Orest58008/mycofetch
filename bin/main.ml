@@ -5,11 +5,11 @@ let config: Config.t = Config.get_config (Sys.argv |> Array.to_list) Config.empt
 let () = if config.help then Config.print_help ()
 
 (* Get and process template *)
-let template = if config.template <> "" || config.marshal_path <> ""
+let template = if config.template <> ""
                then config.template else config.template_path |> Files.read_file
 let template_processed = if config.marshal_path <> "" && not config.marshal_compile
                          then In_channel.open_text config.marshal_path |> Marshal.from_channel
-                         else Template.process_line ~logo:config.logo template
+                         else Template.process_line template
 let () =if config.marshal_compile
         then Marshal.to_channel (Out_channel.open_text config.marshal_path) template_processed []
 
@@ -44,7 +44,11 @@ let result_append = Buffer.add_string result
 
 let handle (source, word) : unit =
   match source with
-  | "" -> result_append word
+  | "" -> if word = "cauto"
+          then let distro = if config.logo <> "" then config.logo
+                            else Files.retrieve_key "/etc/os-release" '=' "id" in
+               Template.colour_of_tag (Distros.distro_of_id distro).colour |> result_append
+          else result_append word
   | "distro" -> let id = Files.retrieve_file "/etc/os-release" '=' |> List.assoc "id" in
                 let distro = Distros.distro_of_id id in
                 (match word with
@@ -60,7 +64,7 @@ let handle (source, word) : unit =
                              let logo_line = if !logo_n < Array.length logo
                                              then logo.(!logo_n) ^ "\x1b[0m"
                                              else logo.(0) ^ "\x1b[0m]" in
-                             Template.process_line ~logo:config.logo ~style:true logo_line
+                             Template.process_line ~style:true logo_line
                              |> List.map (fun (_, y) -> y) |> String.concat "" |> result_append;
                              logo_n := !logo_n + 1
                  | _ -> raise (Invalid_argument ("distro" ^ ":" ^ word))
