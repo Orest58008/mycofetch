@@ -155,7 +155,8 @@ let distro_of_id id : distro =
                 "#c7#  ___| |_#c4#_) )";
                 "#c7# / __|  _)#c4#_/ ";
                 "#c7#( (__| |     ";
-                "#c7# \\_____/     "; |]
+                "#c7# \\_____/     ";
+                "             ";|]
     }
   | "freebsd" -> {
       pm = { name = "pkg"; command = "pkg info" };

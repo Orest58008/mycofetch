@@ -63,7 +63,7 @@ let handle (source, word) : unit =
                                         else distro.logo in
                              let logo_line = if !logo_n < Array.length logo
                                              then logo.(!logo_n) ^ "\x1b[0m"
-                                             else logo.(0) ^ "\x1b[0m]" in
+                                             else logo.(0) ^ "\x1b[0m" in
                              Template.process_line ~style:true logo_line
                              |> List.map (fun (_, y) -> y) |> String.concat "" |> result_append;
                              logo_n := !logo_n + 1
