@@ -277,7 +277,7 @@ let distro_of_id id : distro =
   | "nixos" -> {
       pm = { name = "nix";
              command = "nix-store -q --requisites /run/current-system/sw
-                        nix-store -q --requisites ~/.nix-profile" };
+                        test -f ~/.nix-profile && nix-store -q --requisites ~/.nix-profile" };
       colour = "c4";
       logo_tiny = "";
       logo = [| "             ";
