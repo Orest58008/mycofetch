@@ -5,13 +5,14 @@ let fetch source : (string, string) Hashtbl.t =
               |> List.to_seq |> Hashtbl.of_seq
     | "kernel" -> let kernel_files = ["arch"; "hostname"; "osrelease"; "ostype"] in
                   let get_file f = Files.read_line ("/proc/sys/kernel/" ^ f) in
-                  List.map (fun f -> (f, get_file f)) kernel_files
+                  List.map (fun f -> (f, get_file f |> Option.get)) kernel_files
                   |> List.to_seq |> Hashtbl.of_seq
     | "board" -> let board_files = ["name"; "vendor"; "version"] in
                  let get_file f = Files.read_line ("/sys/devices/virtual/dmi/id/board_" ^ f) in
-                 List.map (fun f -> (f, get_file f)) board_files
+                 List.map (fun f -> (f, get_file f |> Option.get)) board_files
                  |> List.to_seq |> Hashtbl.of_seq
-    | "host" -> [("name", Files.read_line "/etc/hostname")]
+    | "host" -> [("name", Files.read_line "/etc/hostname" |> Option.fold ~some:(fun x -> x)
+                          ~none:(Files.read_line "/etc/static/hostname" |> Option.get))]
                 |> List.to_seq |> Hashtbl.of_seq
     | "uptime" -> let uptime_file = Files.read_file "/proc/uptime" in
                   let uptime = String.split_on_char ' ' uptime_file

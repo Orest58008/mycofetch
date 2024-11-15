@@ -7,9 +7,10 @@ let strip str : string =
 let read_lines path : string list =
   In_channel.open_text path |> In_channel.input_lines
 
-let read_line path : string =
+let read_line path : string option =
+  if Sys.file_exists path then
   In_channel.open_text path |> In_channel.input_line
-  |> Option.fold ~none:"" ~some:(fun x -> x)
+  else None
 
 let read_file path : string =
   In_channel.open_text path |> In_channel.input_all
